@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Product } from "../../types/types";
+import { Product, SortingType } from "../../types/types";
 
 type ProductList = {
   products: Product[];
@@ -43,7 +43,7 @@ const productSlice = createSlice({
       state.favorite = remainingAfterDelete;
     },
 
-    sorting: (state, action: PayloadAction<String>) => {
+    sorting: (state, action: PayloadAction<SortingType>) => {
       if (action.payload === "lowestPrice") {
         state.products.sort((a, b) => a.price - b.price);
       }
