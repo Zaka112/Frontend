@@ -17,8 +17,13 @@ import { getProductDetailData } from "../../redux/thunk/products";
 import { cartListActions } from "../../redux/slices/cart";
 import { productActions } from "../../redux/slices/products";
 
+
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
+
+  
+let theme = useSelector((state: RootState) => state.theme.theme);
+theme==="dark"? theme="light": theme="dark"
 
   const productDetail = useSelector(
     (state: RootState) => state.productDetail.product
@@ -32,7 +37,8 @@ export default function ProductDetail() {
   const favoriteProducts = useSelector(
     (state: RootState) => state.products.favorite
   );
-  const dispatchApp = useDispatch<AppDispatch>();
+
+    const dispatchApp = useDispatch<AppDispatch>();
 
   const productDetailURL = `https://api.escuelajs.co/api/v1/products/${id}?fullText=true`;
 
@@ -48,42 +54,27 @@ export default function ProductDetail() {
   function handelFavoriteProductIcon(product: Product) {
     if (!isFavorite) {
       dispatch(productActions.addFavoriteProducts(product));
-      toast.success(`${product.title} has been added to favorite list`, {
+      toast.success(`${product.title} has been added to favorite list.`, {
         position: "top-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+        autoClose: 3000,
+        theme: theme,
       });
     } else {
       dispatch(productActions.deleteFavoriteProducts(product));
-      toast.success(`${product.title} removed from favorite list`, {
+      toast.success(`${product.title} removed from favorite list.`, {
         position: "top-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+        autoClose: 3000,
+        theme: theme,
       });
     }
   }
   function addToCart(product: Product): void {
     if (!isInCart) {
       dispatch(cartListActions.addToCart(product));
-      toast.success(`${product.title} successfully added to the cart`, {
+      toast.success(`${product.title} successfully added to the cart.`, {
         position: "top-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+        autoClose: 3000,
+        theme:theme,
       });
     }
   }
@@ -105,8 +96,8 @@ export default function ProductDetail() {
           display: "flex",
           marginTop: 5,
           justifyContent: "center",
-          minHeight:700
-         }}
+          minHeight: 700,
+        }}
       >
         <Box
           key={productDetail?.id}
@@ -133,6 +124,12 @@ export default function ProductDetail() {
                 {productDetail?.title} belongs to {productDetail?.category.name}{" "}
                 category.
               </Typography>
+              <Link to="/productlist" style={{ color: "inherit" }}>
+                <Button size="small" style={{ color: "inherit" }}>
+                  Back to shop
+                </Button>
+              </Link>
+              ||
               <Button
                 size="small"
                 style={{ color: "inherit" }}
@@ -144,12 +141,6 @@ export default function ProductDetail() {
               >
                 Add to cart
               </Button>
-              ||
-              <Link to="/productlist" style={{ color: "inherit" }}>
-                <Button size="small" style={{ color: "inherit" }}>
-                  Back to shop
-                </Button>
-              </Link>
             </CardContent>
 
             <IconButton

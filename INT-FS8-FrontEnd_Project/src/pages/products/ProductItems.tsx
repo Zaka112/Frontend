@@ -22,7 +22,11 @@ import { Product } from "../../types/types";
 type Prop = { product: Product };
 
 export default function ProductItems({ product }: Prop) {
+  let theme = useSelector((state: RootState) => state.theme.theme);
+  theme === "dark" ? (theme = "light") : (theme = "dark");
+
   const cartItems = useSelector((state: RootState) => state.cartList.cartItems);
+
   const favoriteProducts = useSelector(
     (state: RootState) => state.products.favorite
   );
@@ -40,25 +44,15 @@ export default function ProductItems({ product }: Prop) {
       dispatch(productActions.addFavoriteProducts(product));
       toast.success(`${product.title} has been added to favorite list`, {
         position: "top-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+        autoClose: 3000,
+        theme: theme,
       });
     } else {
       dispatch(productActions.deleteFavoriteProducts(product));
       toast.success(`${product.title} removed from favorite list`, {
         position: "top-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+        autoClose: 3000,
+        theme: theme,
       });
     }
   }
@@ -68,16 +62,10 @@ export default function ProductItems({ product }: Prop) {
       dispatch(cartListActions.addToCart(product));
       toast.success(`${product.title} successfully added to the cart`, {
         position: "top-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+        autoClose: 3000,
+        theme: theme,
       });
     }
-    
   }
   return (
     <Paper>
