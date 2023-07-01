@@ -18,4 +18,9 @@ export type CartProducts = Product & {
   counter: number;
 };
 
-export type SortingType = "lowestPrice" | "highestPrice" | "AZ" | "ZA" | "reset";
+export type SortingType =
+  | "lowestPrice"
+  | "highestPrice"
+  | "AZ"
+  | "ZA"
+  | "reset";

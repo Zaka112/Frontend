@@ -16,13 +16,11 @@ import { productActions } from "../redux/slices/products";
 import { SortingType } from "../types/types";
 
 export default function SortProducts() {
-  
- 
-    const [sorting, setSorting] = useState<SortingType>("reset");
+  const [sorting, setSorting] = useState<SortingType>("reset");
   const dispatch = useDispatch();
   function handleChange(event: SelectChangeEvent) {
-    // setSorting(event.target.value);
-    // dispatch(productActions.sorting(event.target.value));
+    setSorting(event.target.value as SortingType);
+    dispatch(productActions.sorting(event.target.value as SortingType));
   }
 
   return (

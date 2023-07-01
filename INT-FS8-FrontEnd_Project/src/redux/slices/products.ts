@@ -6,14 +6,14 @@ type ProductList = {
   products: Product[];
   favorite: Product[];
   isLoading: boolean;
-  fetchedProducts: Product[]
+  fetchedProducts: Product[];
 };
 
 const initialState: ProductList = {
   products: [],
   favorite: [],
   isLoading: true,
-  fetchedProducts:[]  
+  fetchedProducts: [],
 };
 
 const productSlice = createSlice({
@@ -22,7 +22,7 @@ const productSlice = createSlice({
   reducers: {
     getProductsData: (state, action: PayloadAction<Product[]>) => {
       state.products = action.payload;
-      state.fetchedProducts= action.payload;
+      state.fetchedProducts = action.payload;
       state.isLoading = false;
     },
     addFavoriteProducts: (state, action: PayloadAction<Product>): void => {
@@ -57,7 +57,7 @@ const productSlice = createSlice({
         state.products.sort((a, b) => b.title.localeCompare(a.title));
       }
       if (action.payload === "reset") {
-        state.products=state.fetchedProducts
+        state.products = state.fetchedProducts;
       }
     },
   },
