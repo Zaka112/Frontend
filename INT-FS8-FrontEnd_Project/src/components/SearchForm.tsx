@@ -7,6 +7,7 @@ import { searchActions } from "../redux/slices/search";
 
 export default function SearchForm() {
   const [userInput, setUserInput] = useState("");
+  //TODO::purify search
   const dispatch = useDispatch();
   function findProduct(event: React.ChangeEvent<HTMLInputElement>) {
     setUserInput(event.target.value);
