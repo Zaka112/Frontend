@@ -16,6 +16,7 @@ const themeSlice = createSlice({
       state.theme === "light"
         ? (state.theme = "dark")
         :  (state.theme = "light");
+
         //TODO:: add more themes for web
     },
   },
